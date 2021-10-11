@@ -17,38 +17,47 @@
 #ifdef _MSVC_DEBUG
 #include "D2Loader.h"
 #endif
-
+// D2线程Id
 static HANDLE hD2Thread = INVALID_HANDLE_VALUE;
+// 事件线程Id
 static HANDLE hEventThread = INVALID_HANDLE_VALUE;
 BOOL WINAPI DllMain(HINSTANCE hDll, DWORD dwReason, LPVOID lpReserved) {
     switch (dwReason) {
     case DLL_PROCESS_ATTACH: {
+        // 1. 防止DLL嵌套加载
         DisableThreadLibraryCalls(hDll);
         if (lpReserved != NULL) {
+            // 模块内存加载
             Vars.pModule = (Module*)lpReserved;
 
             if (!Vars.pModule)
                 return FALSE;
-
+            // 直接从module里面拷贝文件路劲
             wcscpy_s(Vars.szPath, MAX_PATH, Vars.pModule->szPath);
+            // 这个变量 分辨pModule是怎么加载的
             Vars.bLoadedWithCGuard = TRUE;
+            //TODO 这里是不是还需要把模块句柄也设置进去
         } else {
+            // 模块句柄
             Vars.hModule = hDll;
+            // 通过API来获取文件路劲
             GetModuleFileNameW(hDll, Vars.szPath, MAX_PATH);
             PathRemoveFileSpecW(Vars.szPath);
             wcscat_s(Vars.szPath, MAX_PATH, L"\\");
             Vars.bLoadedWithCGuard = FALSE;
         }
-
+        // 2. 设置日志路径并创建目录
         swprintf_s(Vars.szLogPath, _countof(Vars.szLogPath), L"%slogs\\", Vars.szPath);
         CreateDirectoryW(Vars.szLogPath, NULL);
+        // 3. 解析命令行
         InitCommandLine();
         ParseCommandLine(Vars.szCommandLine);
+        // 4. 初始化设置
         InitSettings();
         sLine* command = NULL;
         Vars.bUseRawCDKey = FALSE;
-
-        if (command = GetCommand(L"-title")) {
+        // 5. 获取一堆参数得值，来覆盖默认变量
+        if (command = GetCommand(L"-title")) { // 如果有设置 就 复制值
             int len = wcslen((wchar_t*)command->szText);
             wcsncat_s(Vars.szTitle, (wchar_t*)command->szText, len);
         }
@@ -65,7 +74,7 @@ BOOL WINAPI DllMain(HINSTANCE hDll, DWORD dwReason, LPVOID lpReserved) {
         if (GetCommand(L"-ftj"))
             Vars.bReduceFTJ = TRUE;
 
-        if (command = GetCommand(L"-d2c")) {
+        if (command = GetCommand(L"-d2c")) { // 设置cdkey
             Vars.bUseRawCDKey = TRUE;
             const char* keys = UnicodeToAnsi(command->szText);
             strncat_s(Vars.szClassic, keys, strlen(keys));
@@ -91,6 +100,7 @@ BOOL WINAPI DllMain(HINSTANCE hDll, DWORD dwReason, LPVOID lpReserved) {
 
         Vars.bShutdownFromDllMain = FALSE;
         SetUnhandledExceptionFilter(ExceptionHandler);
+        // 6. 启动主要得逻辑
         if (!Startup())
             return FALSE;
     } break;
@@ -104,7 +114,9 @@ BOOL WINAPI DllMain(HINSTANCE hDll, DWORD dwReason, LPVOID lpReserved) {
 
     return TRUE;
 }
-
+/**
+* 主业务函数
+*/ 
 BOOL Startup(void) {
     InitializeCriticalSection(&Vars.cEventSection);
     InitializeCriticalSection(&Vars.cRoomSection);
@@ -139,13 +151,15 @@ BOOL Startup(void) {
     //	hEventThread = CreateThread(0, 0, EventThread, NULL, 0, 0);
     return TRUE;
 }
-
+/**
+* 退出的逻辑
+*/
 void Shutdown(void) {
     if (!Vars.bNeedShutdown)
         return;
 
     Vars.bActive = FALSE;
-    if (!Vars.bShutdownFromDllMain)
+    if (!Vars.bShutdownFromDllMain) // 等待线程执行完
         WaitForSingleObject(hD2Thread, INFINITE);
 
     SetWindowLong(D2GFX_GetHwnd(), GWL_WNDPROC, (LONG)Vars.oldWNDPROC);

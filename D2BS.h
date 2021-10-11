@@ -25,16 +25,16 @@
 struct Private {
     DWORD dwPrivateType;
 };
-
+// 模块
 struct Module {
     union {
         HMODULE hModule;
-        DWORD dwBaseAddress;
+        DWORD dwBaseAddress; // 基址
     };
     DWORD _1;
-    wchar_t szPath[MAX_PATH];
+    wchar_t szPath[MAX_PATH];  // 路径地址
 };
-
+// 变量
 struct Variables {
     int nChickenHP;
     int nChickenMP;
@@ -122,7 +122,7 @@ struct Variables {
     DWORD dwSelectedUnitType;
     POINT pMouseCoords;
 };
-
+// 程序全局变量
 extern Variables Vars;
 
 BOOL Startup(void);

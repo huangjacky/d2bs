@@ -25,7 +25,9 @@ bool __fastcall UpdatePlayerGid(Script* script, void*, uint) {
     script->UpdatePlayerGid();
     return true;
 }
-
+/**
+* Ö÷Ïß³ÌÂß¼­
+*/
 DWORD WINAPI D2Thread(LPVOID lpParam) {
     sLine* command;
     bool beginStarter = true;

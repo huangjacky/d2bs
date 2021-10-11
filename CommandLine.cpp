@@ -86,7 +86,9 @@ VOID ParseCommandLine(LPWSTR Command) {
         aCommand.Add(sl);
     }
 }
-
+// 获取命令行参数
+// @param Param 参数名
+// @return 如果参数存在就返回对应得值，否则返回0
 sLine* GetCommand(LPWSTR Param) {
     for (int x = 0; x < aCommand.GetSize(); x++)
         if (!_wcsicmp(aCommand[x]->Param, Param))
