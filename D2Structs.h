@@ -22,13 +22,13 @@ struct SplitText {
     wchar_t* lpwszText;
     SplitText* lpsNext;
 };
-
+// 储物箱格子
 struct InventoryInfo {
     int nLocation;
     int nMaxXCells;
     int nMaxYCells;
 };
-
+// 游戏信息
 struct GameStructInfo {
     BYTE _1[0x1F];             // 0x00 // was 0x1B
     char szGameName[0x18];     // 0x1F
@@ -169,7 +169,7 @@ struct Control {
 
 #pragma pack(push)
 #pragma pack(1)
-
+// 战网数据
 struct BnetData {
     DWORD dwId;                 // 0x00
     DWORD dwId2;                // 0x04
@@ -205,7 +205,7 @@ struct BnetData {
     DWORD passhash;             //+0x3c1
     BYTE passlength;            //+0x3c5
 };
-
+// 房间信息
 struct RoomTile {
     Room2* pRoom2;   // 0x00
     RoomTile* pNext; // 0x04
@@ -242,7 +242,7 @@ struct QuestInfo {
 struct Waypoint {
     BYTE flags; // 0x00
 };
-
+// 玩家信息
 struct PlayerData {
     char szName[0x10];            // 0x00
     QuestInfo* pNormalQuest;      // 0x10
@@ -454,7 +454,7 @@ struct Light {
 struct SkillInfo {
     WORD wSkillId; // 0x00
 };
-
+// 技能
 struct Skill {
     SkillInfo* pSkillInfo; // 0x00
     Skill* pNextSkill;     // 0x04
@@ -465,14 +465,14 @@ struct Skill {
     DWORD ChargesLeft;     // 0x38
     DWORD IsCharge;        // 0x3C 1 for charge, else 0
 };                         // size = 0x40
-
+// 信息
 struct Info {
     BYTE* pGame1C;      // 0x00
     Skill* pFirstSkill; // 0x04
     Skill* pLeftSkill;  // 0x08
     Skill* pRightSkill; // 0x0C
 };
-
+// 物品数据
 struct ItemData {
     DWORD dwQuality;            // 0x00
     DWORD dwSeed[2];            // 0x04
@@ -505,7 +505,7 @@ struct ItemData {
     WORD _13[12];               // 0x6C
     UnitAny* pOwner;            // 0x84
 };
-
+// 物品文字
 struct ItemTxt {
     wchar_t szName2[0x40]; // 0x00
     union {
@@ -522,7 +522,7 @@ struct ItemTxt {
     BYTE _3[0x0d];     // 0x11F
     BYTE fQuest;       // 0x12A
 };
-
+// 怪物的文字
 struct MonsterTxt {
     BYTE _1[0x6];      // 0x00
     WORD nLocaleTxtNo; // 0x06
@@ -544,7 +544,7 @@ struct MonsterTxt {
     wchar_t szDescriptor[0x3c]; // 0xF0
     BYTE _3[0x1a0];             // 0x12C
 };
-
+// 怪物数据
 struct MonsterData {
     BYTE _1[22]; // 0x00
     struct {
@@ -699,7 +699,7 @@ struct WardenIATInfo_t {
 
 #pragma pack(push)
 #pragma pack(1)
-
+// NPC菜单
 struct NPCMenu {
     DWORD dwNPCClassId;
     DWORD dwEntryAmount;

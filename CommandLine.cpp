@@ -28,7 +28,9 @@ CArrayEx<sLine*, sLine*> aCommand;
 
 // Commands.
 sLine CLine[] = {{L"-d2c", 0}, {L"-d2x", 0}, {L"-title", 0}, {L"-mpq", 0}, {L"-profile", 0}, {L"-handle", 0}, {L"-multi", 0}, {L"-sleepy", 0}, {L"-cachefix", 0}};
-
+/**
+* 解析指定參數的值
+*/
 DWORD ParseStringForText(LPWSTR Source, LPWSTR text) {
     WCHAR BUF[4059];
     memset(BUF, 0x00, 4059);
@@ -48,7 +50,9 @@ DWORD ParseStringForText(LPWSTR Source, LPWSTR text) {
     }
     return -1;
 }
-
+/**
+ * 解析命令行參數
+ */
 VOID ParseCommandLine(LPWSTR Command) {
     for (int x = 0; x < ArraySize(CLine); x++) {
         DWORD id = ParseStringForText(Command, CLine[x].Param);

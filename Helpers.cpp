@@ -479,7 +479,9 @@ void ResumeProcess() {
         CloseHandle(hThread);
     }
 }
-
+/**
+* 獲取命令行存到Vars.szCommandLine
+*/
 void InitCommandLine() {
     wchar_t* line = GetCommandLineW();
     memcpy(Vars.szCommandLine, line, min(sizeof(Vars.szCommandLine), sizeof(wchar_t) * wcslen(line)));

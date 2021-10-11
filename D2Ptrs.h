@@ -58,7 +58,8 @@ enum {
 #define ASMPTR(d1, v1, o1) extern DWORD d1##_##v1;
 
 #endif
-
+    // void* __stdcall D2CLIENT_GetQuestInfo_t(void)
+    // D2CLIENT_GetQuestInfo_t* D2CLIENT_GetQuestInfo
     FUNCPTR(D2CLIENT, GetQuestInfo, void* __stdcall, (void), 0xB32D0) // Updated 1.14d //004B32D0-BASE
 
     FUNCPTR(D2CLIENT, SubmitItem, void __fastcall, (DWORD dwItemId), 0xB2370) // Updated 1.14d //004B2370-BASE

@@ -24,7 +24,9 @@ struct sLine {
     BOOL isBool;
     WCHAR szText[600];
 };
-
+/**
+* ½âÎöÃüÁîĞĞ…¢”µ
+*/
 void ParseCommandLine(LPWSTR Command);
 sLine* GetCommand(LPWSTR Param);
 
