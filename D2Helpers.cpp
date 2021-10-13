@@ -132,15 +132,16 @@ ClientGameState ClientState(void) {
             state = ClientStateBusy;
             return state;
         }
+        // 角色相关的数据都存在，证明在游戏里面
         if (player->pInventory && player->pPath &&
             // player->pPath->xPos &&
             player->pPath->pRoom1 && player->pPath->pRoom1->pRoom2 && player->pPath->pRoom1->pRoom2->pLevel && player->pPath->pRoom1->pRoom2->pLevel->dwLevelNo)
             state = ClientStateInGame;
         else
             state = ClientStateBusy;
-    } else if (!player && firstControl)
+    } else if (!player && firstControl) // 没有角色数据，就是在菜单
         state = ClientStateMenu;
-    else if (!player && !firstControl)
+    else if (!player && !firstControl) // 没有角色也没有控制
         state = ClientStateNull;
 
     return state;

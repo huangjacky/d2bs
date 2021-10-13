@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "*.py": "python",
+        "js32.h": "c",
+        "d2structs.h": "c"
+    }
+}

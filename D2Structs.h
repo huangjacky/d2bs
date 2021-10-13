@@ -22,13 +22,13 @@ struct SplitText {
     wchar_t* lpwszText;
     SplitText* lpsNext;
 };
-// ´¢ÎïÏä¸ñ×Ó
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 struct InventoryInfo {
     int nLocation;
     int nMaxXCells;
     int nMaxYCells;
 };
-// ÓÎÏ·ĞÅÏ¢
+// ï¿½ï¿½Ï·ï¿½ï¿½Ï¢
 struct GameStructInfo {
     BYTE _1[0x1F];             // 0x00 // was 0x1B
     char szGameName[0x18];     // 0x1F
@@ -169,28 +169,28 @@ struct Control {
 
 #pragma pack(push)
 #pragma pack(1)
-// Õ½ÍøÊı¾İ
+// æˆ˜ç½‘æ•°æ®
 struct BnetData {
     DWORD dwId;                 // 0x00
-    DWORD dwId2;                // 0x04
-    BYTE _1[0x10];              // 0x08
-    DWORD dwId3;                // 0x18
-    WORD Unk3;                  // 0x1C
+    DWORD dwId2;                // 0x04 
+    BYTE _1[0x10];              // 0x08 
+    DWORD dwId3;                // 0x18 
+    WORD Unk3;                  // 0x1C 
     BYTE _2;                    // 0x1E
-    char szGameName[0x16];      // 0x1F
+    char szGameName[0x16];      // 0x1F æˆ¿é—´å
     WORD _3;                    // 0x35
-    char szGameIP[0x10];        // 0x37
+    char szGameIP[0x10];        // 0x37 IP
     BYTE _5[0x42];              // 0x47
-    DWORD dwId4;                // 0x89
-    char szAccountName[0x30];   // 0x8D
-    char szPlayerName[0x18];    // 0xBD
-    char szRealmName[0x08];     // 0xD5
+    DWORD dwId4;                // 0x89 
+    char szAccountName[0x30];   // 0x8D è´¦å·å
+    char szPlayerName[0x18];    // 0xBD è§’è‰²å
+    char szRealmName[0x08];     // 0xD5 å›½åº¦å
     BYTE _8[0x111];             // 0xDD
     BYTE nCharClass;            // 0x1EE
     BYTE nCharFlags;            // 0x1EF
-    BYTE nMaxDiff;              // 0x1F0
+    BYTE nMaxDiff;              // 0x1F0 æœ€å¤§éš¾åº¦
     BYTE _9[0x1F];              // 0x1F1
-    BYTE CreatedGameDifficulty; // 0x210
+    BYTE CreatedGameDifficulty; // 0x210 æ¸¸æˆéš¾åº¦
     void* _10;                  // 0x211
     BYTE _11[0x15];             // 0x215
     WORD _12;                   // 0x22A
@@ -205,7 +205,7 @@ struct BnetData {
     DWORD passhash;             //+0x3c1
     BYTE passlength;            //+0x3c5
 };
-// ·¿¼äĞÅÏ¢
+// æˆ¿é—´ç“·ç –
 struct RoomTile {
     Room2* pRoom2;   // 0x00
     RoomTile* pNext; // 0x04
@@ -233,7 +233,7 @@ struct RosterUnit {
     DWORD _9[2];        // 0x78
     RosterUnit* pNext;  // 0x80
 };
-
+// ä»»åŠ¡ä¿¡æ¯
 struct QuestInfo {
     void* pBuffer; // 0x00
     DWORD _1;      // 0x04
@@ -242,9 +242,9 @@ struct QuestInfo {
 struct Waypoint {
     BYTE flags; // 0x00
 };
-// Íæ¼ÒĞÅÏ¢
+// è§’è‰²æ•°æ®
 struct PlayerData {
-    char szName[0x10];            // 0x00
+    char szName[0x10];            // 0x00 è§’è‰²å
     QuestInfo* pNormalQuest;      // 0x10
     QuestInfo* pNightmareQuest;   // 0x14
     QuestInfo* pHellQuest;        // 0x18
@@ -429,7 +429,7 @@ struct StatList {
     DWORD _6[2];           // 0x50
     DWORD StateBits[6];    // 0x58
 };
-
+// åº“å­˜
 struct Inventory {
     DWORD dwSignature;    // 0x00
     BYTE* bGame1C;        // 0x04
@@ -454,7 +454,7 @@ struct Light {
 struct SkillInfo {
     WORD wSkillId; // 0x00
 };
-// ¼¼ÄÜ
+// æŠ€èƒ½
 struct Skill {
     SkillInfo* pSkillInfo; // 0x00
     Skill* pNextSkill;     // 0x04
@@ -465,14 +465,14 @@ struct Skill {
     DWORD ChargesLeft;     // 0x38
     DWORD IsCharge;        // 0x3C 1 for charge, else 0
 };                         // size = 0x40
-// ĞÅÏ¢
+// ï¿½ï¿½Ï¢
 struct Info {
     BYTE* pGame1C;      // 0x00
     Skill* pFirstSkill; // 0x04
     Skill* pLeftSkill;  // 0x08
     Skill* pRightSkill; // 0x0C
 };
-// ÎïÆ·Êı¾İ
+// ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½
 struct ItemData {
     DWORD dwQuality;            // 0x00
     DWORD dwSeed[2];            // 0x04
@@ -505,7 +505,7 @@ struct ItemData {
     WORD _13[12];               // 0x6C
     UnitAny* pOwner;            // 0x84
 };
-// ÎïÆ·ÎÄ×Ö
+// ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½
 struct ItemTxt {
     wchar_t szName2[0x40]; // 0x00
     union {
@@ -522,7 +522,7 @@ struct ItemTxt {
     BYTE _3[0x0d];     // 0x11F
     BYTE fQuest;       // 0x12A
 };
-// ¹ÖÎïµÄÎÄ×Ö
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 struct MonsterTxt {
     BYTE _1[0x6];      // 0x00
     WORD nLocaleTxtNo; // 0x06
@@ -544,7 +544,7 @@ struct MonsterTxt {
     wchar_t szDescriptor[0x3c]; // 0xF0
     BYTE _3[0x1a0];             // 0x12C
 };
-// ¹ÖÎïÊı¾İ
+// æ€ªç‰©æ•°æ®
 struct MonsterData {
     BYTE _1[22]; // 0x00
     struct {
@@ -580,7 +580,7 @@ struct ObjectTxt {
     BYTE _5[8];            // 0x1B4
     DWORD nAutoMap;        // 0x1BB
 };
-
+// å¯¹è±¡æ•°æ®
 struct ObjectData {
     ObjectTxt* pTxt; // 0x00
     union {
@@ -699,7 +699,7 @@ struct WardenIATInfo_t {
 
 #pragma pack(push)
 #pragma pack(1)
-// NPC²Ëµ¥
+// NPCï¿½Ëµï¿½
 struct NPCMenu {
     DWORD dwNPCClassId;
     DWORD dwEntryAmount;

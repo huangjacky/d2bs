@@ -10,12 +10,38 @@
 enum DistanceType { Euclidean, Chebyshev, Manhattan };
 
 enum ClientGameState { ClientStateNull, ClientStateMenu, ClientStateInGame, ClientStateBusy };
-
+/**
+ * @brief 日志
+ * 
+ * @param szFormat 
+ * @param ... 
+ */
 void Log(wchar_t* szFormat, ...);
+/**
+ * @brief 打印日志到文件
+ * 
+ * @param szString 
+ */
 void LogNoFormat(const wchar_t* szString);
-
+/**
+ * @brief 获取当前游戏的状态
+ * 
+ * @return ClientGameState 
+ */
 ClientGameState ClientState(void);
+/**
+ * @brief 判断游戏的当前状态是准备好了没有
+ * 
+ * @return true 
+ * @return false 
+ */
 bool GameReady(void);
+/**
+ * @brief 循环调用ClientState直到是游戏中为止
+ * 
+ * @return true 
+ * @return false 
+ */
 bool WaitForGameReady(void);
 DWORD GetPlayerArea(void);
 void SendMouseClick(int x, int y, int clicktype);
